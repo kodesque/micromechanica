@@ -4,16 +4,6 @@
 ---
 
 ### Added:
-- X
-
-### Changed:
-- X
-
-### Fixed:
-- X
-
-### Removed:
-- X
 
 ---
 ## Log start

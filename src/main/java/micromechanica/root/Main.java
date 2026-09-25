@@ -1,9 +1,11 @@
 package micromechanica.root;
 
+import micromechanica.common.capability.CraftProgress;
 import micromechanica.common.init.ModBlocks;
+import micromechanica.common.init.ModCapabilities;
 import micromechanica.common.init.ModItems;
-import micromechanica.network.Network;
-import micromechanica.network.proxy.CommonProxy;
+import micromechanica.network.back.Network;
+import micromechanica.network.back.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -28,7 +30,7 @@ public class Main {
 
     public static SimpleNetworkWrapper packetHandler;
 
-    @SidedProxy(clientSide = "micromechanica.network.proxy.ClientProxy", serverSide = "micromechanica.network.proxy.CommonProxy")
+    @SidedProxy(clientSide = "micromechanica.network.back.proxy.ClientProxy", serverSide = "micromechanica.network.back.proxy.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.Instance
@@ -36,10 +38,10 @@ public class Main {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        ModCapabilities.initCapabilities();
 
         Network.registerPackets();
         proxy.preInit(event);
-
     }
 
     @EventHandler

@@ -1,10 +1,7 @@
 package micromechanica.common.items;
 
 import micromechanica.common.templates.ModItemBase;
-import micromechanica.root.Main;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -16,9 +13,14 @@ public class ItemDebug extends ModItemBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack)
-    {
+    public boolean hasEffect(ItemStack stack) {
         return true;
     }
+
+//    @Override
+//    public @NotNull EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+//
+//    }
+
 
 }

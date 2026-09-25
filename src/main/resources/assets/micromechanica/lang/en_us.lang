@@ -1,0 +1,25 @@
+#CREATIVE TAB
+itemGroup.tabMicromechanica=I'm Micromechanica!
+
+item.micromechanica.debug.name=Debug Item
+
+item.micromechanica.magnifier.name=Magnifying Glass
+item.micromechanica.mortar.name=Mortar
+item.micromechanica.foundry_tiny.name=Tiny Foundry
+item.micromechanica.vat_slag_tiny.name=Tiny Slag Vat
+item.micromechanica.vat_leaching_tiny.name=Tiny Leaching Vat
+item.micromechanica.mixer_tiny.name=Tiny Mixer
+item.micromechanica.reforger_tiny.name=Tiny Reforger
+item.micromechanica.galvanizer_tiny.name=Tiny Galvanizer
+
+item.micromechanica.diamond_glass.name=Diamond Glass
+item.micromechanica.diamond_glass_blend.name=Diamond Glass Blend
+
+item.micromechanica.tchoogun_ingot.name=Tchoogun Ingot
+item.micromechanica.tchoogun_blend.name=Tchoogun Blend
+
+item.micromechanica.quilted_leather.name=Quilted Leather
+
+tooltip.micromechanica.properties.lightness=Lightness:
+tooltip.micromechanica.properties.stiffness=Stiffness:
+tooltip.micromechanica.properties.hardness=Hardness:

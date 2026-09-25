@@ -10,6 +10,7 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,9 +23,9 @@ public class FileGenerator {
 
     public static final Gson GSON = new Gson();
 
-    public static Path STATES = Paths.get("src/main/resources/assets/aldynamica/blockstates");
-    public static Path MODELBLOCK = Paths.get("src/main/resources/assets/aldynamica/models/block");
-    public static Path MODELITEM = Paths.get("src/main/resources/assets/aldynamica/models/item");
+    public static Path STATES = Paths.get("src/main/resources/assets/micromechanica/blockstates");
+    public static Path MODELBLOCK = Paths.get("src/main/resources/assets/micromechanica/models/block");
+    public static Path MODELITEM = Paths.get("src/main/resources/assets/micromechanica/models/item");
 
     public static void generateBlockFiles(Block block) {
 
@@ -95,7 +96,13 @@ public class FileGenerator {
         File[] files = new File(STATES.toString()).listFiles();
         JsonObject root = new JsonObject();
 
-        String shortname = state.getBlock().getRegistryName().getPath();
+        ResourceLocation loc = state.getBlock().getRegistryName();
+
+        if (loc == null) return;
+
+        String shortname = loc.getPath();
+
+        if (files == null) return;
 
         for (File file : files) {
             if (file.getName().equals(shortname))

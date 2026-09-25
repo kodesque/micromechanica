@@ -272,9 +272,7 @@ public class PropertyUtils {
 
     public static double cutDouble(double value) {
 
-        double newValue = BigDecimal.valueOf(value).setScale(1, RoundingMode.FLOOR).doubleValue();
-
-        return newValue;
+        return BigDecimal.valueOf(value).setScale(1, RoundingMode.FLOOR).doubleValue();
     }
 
     public static PropertyBundle returnEmptyBundle() {

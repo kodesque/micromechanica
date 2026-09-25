@@ -1,8 +1,8 @@
 package micromechanica.util.foundation;
 
 import com.google.common.io.Files;
-import micromechanica.api.EnumLangSection;
 import micromechanica.root.Main;
+import micromechanica.util.ContentGroups;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -72,7 +72,7 @@ public class T9n {
         }
     }
 
-    public static String simpleKey(String name, EnumLangSection section) {
+    public static String simpleKey(String name, ContentGroups section) {
 
         TextComponentTranslation comp = new TextComponentTranslation(Main.MODID + "." + name);
 
