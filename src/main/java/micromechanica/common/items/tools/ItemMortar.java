@@ -10,18 +10,8 @@ import java.util.List;
 
 public class ItemMortar extends ModMachineBase {
     public ItemMortar(String name) {
-        super(name);
+        super(name, true);
         this.addSlots(4);
-    }
-
-    @Override
-    public void conductClickedSelf(ItemStack self, ItemStack other) {
-
-    }
-
-    @Override
-    public void conductClickedExternal(ItemStack self, ItemStack other) {
-
     }
 
     @Override

@@ -13,6 +13,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -26,12 +27,16 @@ public class RecipeHandler {
         modRecipes.add(recipe);
     }
 
-    public static void tryCraft(ItemStack machine, @Nullable ItemStack specialInput) {
+    /*
+    Logic for handleRightClick: if tryCraft return != null, delete item under mouse (handled through network)
+     */
+
+    public static ItemStack[] tryCraft(ItemStack machine, @Nullable ItemStack specialInput) {
 
         Item item = machine.getItem();
 
         if (!(item instanceof ModMachineBase)) {
-            return;
+            return null;
         }
 
         ModMachineBase base = (ModMachineBase) item;
@@ -47,7 +52,7 @@ public class RecipeHandler {
         MachineRecipe recipe = findRecipe(base, items, fluids, energy, specialInput);
 
         if (recipe == null) {
-            return;
+            return null;
         }
 
         if ((specialInput != null && recipe.specialInput.equals(Ingredient.fromStacks(specialInput)) || recipe.specialInput == null)) {
@@ -58,13 +63,14 @@ public class RecipeHandler {
                 if (progress.getValue() < recipe.requiredProgress) {
                     progress.setValue(progress.getValue() + 1);
                 } else {
-                    conductCraft(recipe, itemHandler, energyStorage, fluidHandler, specialInput);
                     progress.setValue(0);
+                    return conductCraft(recipe, itemHandler, energyStorage, fluidHandler, specialInput);
                 }
 
             }
         }
 
+        return null;
     }
 
     private static ItemStack[] getItems(IItemHandler itemHandler) {
@@ -119,11 +125,7 @@ public class RecipeHandler {
         return fluids;
     }
 
-    // this method must ONLY return ItemStack if the machine in question is operating with external stacks
-    // example:
-    // (holding) needle (lying) leather -> conductCraft -> return Quilted Leather -> place it into player's inventory
-
-    private static ItemStack conductCraft(MachineRecipe recipe, IItemHandler itemHandler, IEnergyStorage energyStorage, IFluidHandler fluidHandler, @Nullable ItemStack specialInput) {
+    private static ItemStack[] conductCraft(MachineRecipe recipe, IItemHandler itemHandler, IEnergyStorage energyStorage, IFluidHandler fluidHandler, @Nullable ItemStack specialInput) {
 
         if (itemHandler != null) {
 
@@ -141,7 +143,7 @@ public class RecipeHandler {
                         continue;
                     }
 
-                    if (!ingredient.apply(stored)) {
+                    if (!ingredient.apply(stored) || oreDictEqual(ingredient, Ingredient.fromStacks(stored))) {
                         continue;
                     }
 
@@ -166,7 +168,12 @@ public class RecipeHandler {
             energyStorage.extractEnergy(recipe.energyIn, false);
         }
 
-        /*
+        if (itemHandler != null && recipe.itemsOut != null) {
+
+            return recipe.itemsOut;
+        }
+
+         /*
          This is something to pay attention two: machines which are being
          activated by pressing on external items can ONLY return ONE ITEM
 
@@ -174,34 +181,20 @@ public class RecipeHandler {
          one fluid tank... but I'm always trying to think big
          */
 
-        if (specialInput != null && recipe.specialInput.equals(Ingredient.fromStacks(specialInput)) && recipe.machineType.isClickWith()) {
-            specialInput.shrink(1);
-            return recipe.itemsOut[0];
-        } else {
-            if (itemHandler != null && recipe.itemsOut != null) {
+        if (specialInput != null && recipe.specialInput.equals(Ingredient.fromStacks(specialInput))) {
 
-                for (ItemStack output : recipe.itemsOut) {
-
-                    if (output == null || output.isEmpty()) {
-                        continue;
-                    }
-
-                    ItemStack remaining = output.copy();
-
-                    for (int slot = 0; slot < itemHandler.getSlots() && !remaining.isEmpty(); slot++) {
-
-                        remaining = itemHandler.insertItem(slot, remaining, false);
-                    }
-
-                    // TODO: handle remaining output
-                    // if (!remaining.isEmpty()) {
-                    //     ...
-                    // }
-                }
+            if (!recipe.machineType.isClickWith()) {
+                specialInput.shrink(1);
             }
+
+            return new ItemStack[]{recipe.itemsOut[0]};
         }
 
         return null;
+    }
+
+    private static boolean oreDictEqual(Ingredient one, Ingredient two) {
+        return OreDictionary.itemMatches(one.getMatchingStacks()[0], two.getMatchingStacks()[0], false);
     }
 
     public static MachineRecipe findRecipe(

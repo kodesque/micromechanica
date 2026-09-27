@@ -1,7 +1,5 @@
 package micromechanica.events.front;
 
-import micromechanica.common.items.tools.ItemMagnifier;
-import micromechanica.common.templates.ModMachineBase;
 import micromechanica.util.RenderMachineInfo;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -34,13 +32,13 @@ public class ModEventHandler {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onMouseInput(GuiScreenEvent.MouseInputEvent event) {
-        ModMachineBase.handleRightClick(event);
+        MachineEvents.handleMouseClick(event);
     }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onClientTick(TickEvent.ClientTickEvent event) {
-        ItemMagnifier.revealProperties(event);
+        MachineEvents.handleMouseHold(event);
     }
 
     @SubscribeEvent

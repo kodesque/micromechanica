@@ -9,17 +9,8 @@ import java.util.List;
 
 public class ItemBloomJar extends ModMachineBase {
     public ItemBloomJar(String name) {
-        super(name);
-    }
-
-    @Override
-    public void conductClickedSelf(ItemStack self, ItemStack other) {
-
-    }
-
-    @Override
-    public void conductClickedExternal(ItemStack self, ItemStack other) {
-
+        super(name, false);
+        this.setSpecialCase();
     }
 
     @Override

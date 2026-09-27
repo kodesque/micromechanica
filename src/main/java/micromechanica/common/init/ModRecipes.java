@@ -60,69 +60,75 @@ public class ModRecipes {
         registerBloomJar(
                 ModItems.TCHOOGUN_BLEND,
                 ModItems.DOLOMA,
-                ModItems.TCHOOGUN_INGOT);
+                ModItems.TCHOOGUN_INGOT,
+                2400);
         registerBloomJar(
                 ModItems.DIAMOND_GLASS_BLEND,
                 ModItems.DOLOMA,
-                ModItems.DIAMOND_GLASS);
+                ModItems.DIAMOND_GLASS,
+                2400);
 
         registerMortar(
                 Items.FLINT,
                 Items.BLAZE_ROD,
                 Items.IRON_INGOT,
                 Items.GUNPOWDER,
-                ModItems.TCHOOGUN_BLEND);
+                ModItems.TCHOOGUN_BLEND,
+                20);
         registerMortar(
                 Items.SUGAR,
                 new ItemStack(Items.DYE, 15),
                 Items.QUARTZ,
                 Items.DIAMOND,
-                ModItems.DIAMOND_GLASS_BLEND);
+                ModItems.DIAMOND_GLASS_BLEND,
+                10);
 
         registerNeedle(
                 Items.LEATHER,
                 ModItems.YARN,
-                ModItems.QUILTED_LEATHER);
+                ModItems.QUILTED_LEATHER,
+                150);
 
         registerSpindle(
                 Items.GOLD_INGOT,
                 Items.NETHERBRICK,
                 Items.MAGMA_CREAM,
                 Items.STRING,
-                ModItems.YARN);
+                ModItems.YARN,
+                100);
     }
 
-    private static void registerBloomJar(Object mix, Object flux, Object output) {
+    private static void registerBloomJar(Object mix, Object flux, Object output, int progress) {
         RecipeHandler.addRecipe(new MachineRecipe.MachineRecipeFactory()
-                .begin(new ItemStack(ModItems.BLOOMJAR))
+                .begin(new ItemStack(ModItems.BLOOMJAR), progress, false)
                 .setItemsIn(mix, flux)
                 .setItemsOut(output)
                 .write());
     }
 
-    private static void registerMortar(Object i1, Object i2, Object i3, Object i4, Object output) {
+    private static void registerMortar(Object i1, Object i2, Object i3, Object i4, Object output, int progress) {
         RecipeHandler.addRecipe(new MachineRecipe.MachineRecipeFactory()
-                .begin(new ItemStack(ModItems.MORTAR))
+                .begin(new ItemStack(ModItems.MORTAR), progress, false)
                 .setItemsIn(i1, i2, i3, i4)
                 .setSpecialInput(ModItems.PESTLE_VIRTUAL)
                 .setItemsOut(output)
                 .write());
     }
 
-    private static void registerSpindle(Object i1, Object i2, Object i3, Object i4, Object output) {
+    private static void registerSpindle(Object i1, Object i2, Object i3, Object i4, Object output, int progress) {
         RecipeHandler.addRecipe(new MachineRecipe.MachineRecipeFactory()
-                .begin(new ItemStack(ModItems.SPINDLE))
+                .begin(new ItemStack(ModItems.SPINDLE), progress, true)
                 .setItemsIn(i1, i2, i3, i4)
                 .setSpecialInput(ModItems.FLYWHEEL_VIRTUAL)
                 .setItemsOut(output)
                 .write());
     }
 
-    private static void registerNeedle(Object input, Object yarn, Object output) {
+    private static void registerNeedle(Object input, Object yarn, Object output, int progress) {
                 RecipeHandler.addRecipe(new MachineRecipe.MachineRecipeFactory()
-                .begin(new ItemStack(ModItems.NEEDLE))
+                .begin(new ItemStack(ModItems.NEEDLE), progress, true)
                 .setItemsIn(yarn)
-                .setSpecialInput(input, false)
+                .setSpecialInput(input)
                 .setItemsOut(output)
                 .write());
     }

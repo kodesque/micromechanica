@@ -1,7 +1,7 @@
 package micromechanica.common.templates;
 
-import micromechanica.util.InvUtils;
 import micromechanica.util.StorageTypes;
+import micromechanica.util.recipes.RecipeHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.util.ITooltipFlag;
@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
 import org.lwjgl.input.Mouse;
 
 import javax.annotation.Nullable;
@@ -22,6 +23,7 @@ public abstract class ModMachineBase extends ModItemCapableBase {
     //items used for slot backgrounds, if defined
     private Item[] slotLayout;
     boolean clickWith;
+    boolean specialCase;
 
             /*
                 true -> the recipe is initiated when the player clicks on the machine with this item. Item is never consumed.
@@ -41,46 +43,39 @@ public abstract class ModMachineBase extends ModItemCapableBase {
         return clickWith;
     }
 
-    public void conductClickedSelf(ItemStack self, ItemStack other) {
-
+    public void setSpecialCase() {
+        specialCase = true;
     }
 
-    public void conductClickedExternal(ItemStack self, ItemStack other) {
-
+    public boolean isSpecialCase() {
+        return specialCase;
     }
+
+//    public void conductClickedSelf(ItemStack self, ItemStack other) {
+//
+//    }
+//
+//    public void conductClickedExternal(ItemStack self, ItemStack other) {
+//
+//    }
 
     public abstract List<String> addInfoToTooltip();
 
-    /*
-    +1 slot and additional fluid storage are used for storing recipe results!
-    It MUST be handled differently and not being counted as missing a crafting ingredient!
-    no additional energy storage is added, as basic recipes aren't expected to generate energy.
-    energy storage is ONLY for machines that generate energy
-
-    Slot is not being added when a machine works with items in external inventories
-     */
-
     public void addSlots(int size) {
 
-        int realSize = this.clickWith ? size : size + 1;
-
-        super.addStorage(StorageTypes.ITEMS, realSize);
+        super.addStorage(StorageTypes.ITEMS, size);
     }
 
     public void addSlotsWithBackground(Item... slots) {
 
-        int realSize = this.clickWith ? slots.length : slots.length + 1;
-
-        super.addStorage(StorageTypes.ITEMS, slots.length + 1);
+        super.addStorage(StorageTypes.ITEMS, slots.length);
 
         this.slotLayout = slots;
     }
 
     public void addTanks(int amount, int size) {
 
-        int realSize = this.clickWith ? amount : amount + 1;
-
-        for (int i = 0; i < realSize; i++) {
+        for (int i = 0; i < amount; i++) {
             super.addStorage(StorageTypes.FLUID, size);
         }
     }
@@ -91,37 +86,6 @@ public abstract class ModMachineBase extends ModItemCapableBase {
 
     public Item[] getSlotLayout() {
         return slotLayout;
-    }
-
-    public static void handleRightClick(GuiScreenEvent.MouseInputEvent event) {
-        if (Mouse.getEventButton() == 1) {
-
-            if (!(event.getGui() instanceof GuiContainer)) {
-                return;
-            }
-
-            Slot slot = ((GuiContainer) event.getGui()).getSlotUnderMouse();
-            if (slot != null) {
-
-                ItemStack stackCarried = Minecraft.getMinecraft().player.inventory.getItemStack();
-                ItemStack stackLying = slot.getStack();
-
-                if (stackCarried.getItem() instanceof ModMachineBase) {
-
-                    ModMachineBase carried = ((ModMachineBase) (stackCarried.getItem()));
-                    carried.conductClickedSelf(stackCarried, stackLying);
-                    event.setCanceled(true);
-
-                } else if (stackLying.getItem() instanceof ModMachineBase) {
-
-                    ModMachineBase lying = ((ModMachineBase) (stackLying.getItem()));
-                    InvUtils.putItem(stackLying, stackCarried);
-                    lying.conductClickedExternal(stackLying, stackCarried);
-
-                    event.setCanceled(true);
-                }
-            }
-        }
     }
 
     @SideOnly(Side.CLIENT)

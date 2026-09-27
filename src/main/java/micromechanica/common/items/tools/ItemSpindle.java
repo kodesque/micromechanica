@@ -9,18 +9,8 @@ import java.util.List;
 
 public class ItemSpindle extends ModMachineBase {
     public ItemSpindle(String name) {
-        super(name);
+        super(name, true);
         this.addSlots(4);
-    }
-
-    @Override
-    public void conductClickedSelf(ItemStack self, ItemStack other) {
-
-    }
-
-    @Override
-    public void conductClickedExternal(ItemStack self, ItemStack other) {
-
     }
 
     @Override

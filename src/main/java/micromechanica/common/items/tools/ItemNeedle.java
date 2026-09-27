@@ -9,18 +9,8 @@ import java.util.List;
 
 public class ItemNeedle extends ModMachineBase {
     public ItemNeedle(String name) {
-        super(name);
+        super(name, false);
         addSlotsWithBackground(Items.STRING);
-    }
-
-    @Override
-    public void conductClickedSelf(ItemStack self, ItemStack other) {
-
-    }
-
-    @Override
-    public void conductClickedExternal(ItemStack self, ItemStack other) {
-
     }
 
     @Override
