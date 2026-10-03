@@ -1,25 +1,53 @@
-#CREATIVE TAB
+# ============
+# CREATIVE TAB
+# ============
 itemGroup.tabMicromechanica=I'm Micromechanica!
+
+# ============
+# ITEMS
+# ============
 
 item.micromechanica.debug.name=Debug Item
 
+# TOOLS
+
 item.micromechanica.magnifier.name=Magnifying Glass
-item.micromechanica.mortar.name=Mortar
-item.micromechanica.foundry_tiny.name=Tiny Foundry
-item.micromechanica.vat_slag_tiny.name=Tiny Slag Vat
-item.micromechanica.vat_leaching_tiny.name=Tiny Leaching Vat
-item.micromechanica.mixer_tiny.name=Tiny Mixer
-item.micromechanica.reforger_tiny.name=Tiny Reforger
-item.micromechanica.galvanizer_tiny.name=Tiny Galvanizer
+item.micromechanica.bloomjar.name=Unfired Bloomjar
+item.micromechanica.bloomjar.fired.name=Fired Bloomjar
+item.micromechanica.needle.name=Crude Needle
+item.micromechanica.spindle.name=Bone Spindle
+item.micromechanica.mortar.name=Granite Mortar
+item.micromechanica.flywheel_virtual.name=Flywheel
+item.micromechanica.pestle_virtual.name=Pestle
+
+# MACHINES
+
+item.micromechanica.foundry.name=Tiny Foundry
+item.micromechanica.crusher.name=Tiny Crusher
+item.micromechanica.vat_slag.name=Tiny Slag Vat
+item.micromechanica.vat_leaching.name=Tiny Leaching Vat
+item.micromechanica.mixer.name=Tiny Mixer
+item.micromechanica.reforger.name=Tiny Reforger
+item.micromechanica.galvanizer.name=Tiny Galvanizer
+
+# INGREDIENTS
 
 item.micromechanica.diamond_glass.name=Diamond Glass
 item.micromechanica.diamond_glass_blend.name=Diamond Glass Blend
-
 item.micromechanica.tchoogun_ingot.name=Tchoogun Ingot
 item.micromechanica.tchoogun_blend.name=Tchoogun Blend
-
 item.micromechanica.quilted_leather.name=Quilted Leather
+item.micromechanica.doloma.name=Doloma
+item.micromechanica.yarn.name=Yarn
+item.micromechanica.adhesive.name=Adhesive Paste
+item.micromechanica.dry_milk.name=Dry Milk
+
+# ============
+# TOOLTIPS
+# ============
 
 tooltip.micromechanica.properties.lightness=Lightness:
 tooltip.micromechanica.properties.stiffness=Stiffness:
 tooltip.micromechanica.properties.hardness=Hardness:
+
+tooltip.micromechanica.dry_milk.text=With a slight metallic hint

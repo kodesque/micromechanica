@@ -19,7 +19,6 @@ public class MachineRecipe {
     Pair<Fluid, Integer>[] fluidsOut;
     int energyOut;
     ModMachineBase machineType;
-    ItemStack machineStack;
     Ingredient specialInput;
     int requiredProgress;
     boolean hold;
@@ -34,36 +33,34 @@ public class MachineRecipe {
      */
 
     public static class MachineRecipeFactory {
-
-        MachineRecipeFactory factory;
         MachineRecipe recipe;
 
         public MachineRecipeFactory() {}
 
-        public MachineRecipeFactory begin(ItemStack machine, int requiredProgress, boolean hold) {
-            factory = new MachineRecipeFactory();
-            recipe = new MachineRecipe();
-            recipe.machineType = (ModMachineBase) machine.getItem();
-            recipe.machineStack = machine;
-            return factory;
+        public MachineRecipeFactory begin(Item machine, int requiredProgress, boolean hold) {
+            this.recipe = new MachineRecipe();
+            recipe.machineType = (ModMachineBase) machine;
+            recipe.requiredProgress = requiredProgress;
+            recipe.hold = hold;
+            return this;
         }
 
         public MachineRecipeFactory setEnergyIn(int value) {
 
-            if (recipe.machineType.getRealStorage(recipe.machineStack, StorageTypes.ENERGY) != null) {
+            if (recipe.machineType.hasExpectedStorage(recipe.machineType, StorageTypes.ENERGY)) {
                 recipe.energyIn = value;
             } else {
                 this.crash();
             }
 
-            return factory;
+            return this;
         }
 
         public MachineRecipeFactory setItemsIn(Object... value) {
 
-            if (recipe.machineType.getRealStorage(recipe.machineStack, StorageTypes.ITEMS) != null) {
+            if (recipe.machineType.hasExpectedStorage(recipe.machineType, StorageTypes.ITEMS)) {
 
-                if (((IItemHandler)recipe.machineType.getRealStorage(recipe.machineStack, StorageTypes.ITEMS)).getSlots() <= value.length) {
+                if ((recipe.machineType.getExpectedStorage(recipe.machineType).second() >= value.length)) {
 
                     recipe.itemsIn = new Ingredient[value.length];
 
@@ -85,7 +82,7 @@ public class MachineRecipe {
                 this.crash();
             }
 
-            return factory;
+            return this;
         }
 
         public MachineRecipeFactory setSpecialInput(Object input) {
@@ -104,14 +101,14 @@ public class MachineRecipe {
 
             recipe.specialInput = ingr;
 
-            return factory;
+            return this;
         }
 
         public MachineRecipeFactory setFluidIn(Pair<Fluid, Integer>... value) {
 
-            if (recipe.machineType.getRealStorage(recipe.machineStack, StorageTypes.FLUID) != null) {
+            if (recipe.machineType.hasExpectedStorage(recipe.machineType, StorageTypes.FLUID)) {
 
-                recipe.fluidsOut = new Pair[value.length];
+                recipe.fluidsIn = new Pair[value.length];
 
                 for (int i = 0; i < value.length; i++) {
                     recipe.fluidsIn[i] = value[i];
@@ -119,16 +116,16 @@ public class MachineRecipe {
             } else {
                 this.crash();
             }
-            return factory;
+            return this;
         }
 
         public MachineRecipeFactory setItemsOut(Object... value) {
 
-            if (recipe.machineType.getRealStorage(recipe.machineStack, StorageTypes.ITEMS) != null) {
+            if (recipe.machineType.hasExpectedStorage(recipe.machineType, StorageTypes.ITEMS)) {
 
-                if (((IItemHandler)recipe.machineType.getRealStorage(recipe.machineStack, StorageTypes.ITEMS)).getSlots() <= value.length) {
+                if ((recipe.machineType.getExpectedStorage(recipe.machineType).second() >= value.length)) {
 
-                    recipe.itemsIn = new Ingredient[value.length];
+                    recipe.itemsOut = new ItemStack[value.length];
 
                     for (int i = 0; i < value.length; i++) {
 
@@ -147,14 +144,14 @@ public class MachineRecipe {
                 this.crash();
             }
 
-            return factory;
+            return this;
         }
 
         public MachineRecipeFactory setFluidsOut(Pair<Fluid, Integer>... value) {
 
-            if (recipe.machineType.getRealStorage(recipe.machineStack, StorageTypes.FLUID) != null) {
+            if (recipe.machineType.hasExpectedStorage(recipe.machineType, StorageTypes.FLUID)) {
 
-                recipe.fluidsIn = new Pair[value.length];
+                recipe.fluidsOut = new Pair[value.length];
 
                 for (int i = 0; i < value.length; i++) {
                     recipe.fluidsOut[i] = value[i];
@@ -162,17 +159,17 @@ public class MachineRecipe {
             } else {
                 this.crash();
             }
-            return factory;
+            return this;
         }
 
         public MachineRecipeFactory setEnergyOut(int value) {
 
-            if (recipe.machineType.getRealStorage(recipe.machineStack, StorageTypes.ENERGY) != null) {
+            if (recipe.machineType.hasExpectedStorage(recipe.machineType, StorageTypes.ENERGY)) {
                 recipe.energyOut = value;
             } else {
                 this.crash();
             }
-            return factory;
+            return this;
         }
 
         public MachineRecipe write() {

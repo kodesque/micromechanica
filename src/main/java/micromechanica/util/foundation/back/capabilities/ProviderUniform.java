@@ -1,6 +1,7 @@
-package micromechanica.common.capability;
+package micromechanica.util.foundation.back.capabilities;
 
 import micromechanica.api.ICraftProgress;
+import micromechanica.common.capability.CraftProgress;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

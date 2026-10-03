@@ -1,4 +1,4 @@
-package micromechanica.util.foundation;
+package micromechanica.util.foundation.front;
 
 import com.google.common.io.Files;
 import micromechanica.root.Main;

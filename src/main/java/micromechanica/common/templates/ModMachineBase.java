@@ -1,19 +1,12 @@
 package micromechanica.common.templates;
 
 import micromechanica.util.StorageTypes;
-import micromechanica.util.recipes.RecipeHandler;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.IItemHandler;
-import org.lwjgl.input.Mouse;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -37,6 +30,7 @@ public abstract class ModMachineBase extends ModItemCapableBase {
         super(name);
 
         this.clickWith = clickWith;
+        this.setMaxStackSize(1);
     }
 
     public boolean isClickWith() {
@@ -59,16 +53,14 @@ public abstract class ModMachineBase extends ModItemCapableBase {
 //
 //    }
 
-    public abstract List<String> addInfoToTooltip();
-
     public void addSlots(int size) {
 
-        super.addStorage(StorageTypes.ITEMS, size);
+        this.addStorage(StorageTypes.ITEMS, size);
     }
 
     public void addSlotsWithBackground(Item... slots) {
 
-        super.addStorage(StorageTypes.ITEMS, slots.length);
+        this.addStorage(StorageTypes.ITEMS, slots.length);
 
         this.slotLayout = slots;
     }
@@ -76,22 +68,15 @@ public abstract class ModMachineBase extends ModItemCapableBase {
     public void addTanks(int amount, int size) {
 
         for (int i = 0; i < amount; i++) {
-            super.addStorage(StorageTypes.FLUID, size);
+            this.addStorage(StorageTypes.FLUID, size);
         }
     }
 
     public void addBattery(int capacity) {
-        super.addStorage(StorageTypes.ENERGY, capacity);
+        this.addStorage(StorageTypes.ENERGY, capacity);
     }
 
     public Item[] getSlotLayout() {
         return slotLayout;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        if (addInfoToTooltip() != null && !addInfoToTooltip().isEmpty()) {
-            tooltip.add(addInfoToTooltip().toString());
-        }
     }
 }

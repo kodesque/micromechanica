@@ -1,10 +1,10 @@
 package micromechanica.common.init;
 
-import micromechanica.common.templates.ModMachineBase;
 import micromechanica.root.Main;
 import micromechanica.util.recipes.MachineRecipe;
-import micromechanica.util.recipes.RecipeHandler;
+import micromechanica.util.recipes.MachineRecipeManager;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -45,6 +45,44 @@ public class ModRecipes {
                 'L', ModItems.QUILTED_LEATHER
         );
 
+        registerShaped(
+                ModItems.MORTAR,
+                "  S",
+                "GFG",
+                "GG ",
+                'S', Items.STICK,
+                'G', new ItemStack(Blocks.STONE, 1, 1),
+                'F', Items.FLINT
+        );
+
+        registerShaped(
+                ModItems.BLOOMJAR,
+                "BFB",
+                "C C",
+                "BCB",
+                'B', Items.CLAY_BALL,
+                'C', Blocks.CLAY,
+                'F', Items.FLINT
+        );
+
+        registerShaped(
+                ModItems.NEEDLE,
+                "I  ",
+                " I ",
+                "  I",
+                'I', ModItems.TCHOOGUN_INGOT
+        );
+
+        registerShaped(
+                ModItems.SPINDLE,
+                "  B",
+                "SB ",
+                "IS ",
+                'B', Items.BONE,
+                'S', ModItems.ADHESIVE,
+                'I', ModItems.TCHOOGUN_INGOT
+        );
+
 //        registerShapeless(ModItems.DIAMOND_GLASS_BLEND, Ingredient.fromItem(Items.SUGAR), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 15)), Ingredient.fromItem(Items.QUARTZ), Ingredient.fromItems(Items.DIAMOND));
 //        registerShapeless(ModItems.TCHOOGUN_BLEND, Ingredient.fromItem(Items.FLINT), Ingredient.fromItems(Items.IRON_INGOT), Ingredient.fromItem(Items.GUNPOWDER), Ingredient.fromItems(Items.BLAZE_POWDER));
     }
@@ -53,6 +91,7 @@ public class ModRecipes {
 
 //        registerFurnace(ModItems.DIAMOND_GLASS_BLEND, ModItems.DIAMOND_GLASS, 1.0F);
 //        registerFurnace(ModItems.TCHOOGUN_BLEND, ModItems.TCHOOGUN_INGOT, 1.0F);
+        registerFurnace(Items.MILK_BUCKET, ModItems.DRY_MILK, 0.2F);
 
     }
 
@@ -83,6 +122,14 @@ public class ModRecipes {
                 ModItems.DIAMOND_GLASS_BLEND,
                 10);
 
+        registerMortar(
+                Items.BONE,
+                Items.LEATHER,
+                Items.WHEAT,
+                ModItems.DRY_MILK,
+                ModItems.ADHESIVE,
+                5);
+
         registerNeedle(
                 Items.LEATHER,
                 ModItems.YARN,
@@ -99,16 +146,16 @@ public class ModRecipes {
     }
 
     private static void registerBloomJar(Object mix, Object flux, Object output, int progress) {
-        RecipeHandler.addRecipe(new MachineRecipe.MachineRecipeFactory()
-                .begin(new ItemStack(ModItems.BLOOMJAR), progress, false)
+        MachineRecipeManager.addRecipe(new MachineRecipe.MachineRecipeFactory()
+                .begin(ModItems.BLOOMJAR, progress, false)
                 .setItemsIn(mix, flux)
                 .setItemsOut(output)
                 .write());
     }
 
     private static void registerMortar(Object i1, Object i2, Object i3, Object i4, Object output, int progress) {
-        RecipeHandler.addRecipe(new MachineRecipe.MachineRecipeFactory()
-                .begin(new ItemStack(ModItems.MORTAR), progress, false)
+        MachineRecipeManager.addRecipe(new MachineRecipe.MachineRecipeFactory()
+                .begin(ModItems.MORTAR, progress, false)
                 .setItemsIn(i1, i2, i3, i4)
                 .setSpecialInput(ModItems.PESTLE_VIRTUAL)
                 .setItemsOut(output)
@@ -116,8 +163,8 @@ public class ModRecipes {
     }
 
     private static void registerSpindle(Object i1, Object i2, Object i3, Object i4, Object output, int progress) {
-        RecipeHandler.addRecipe(new MachineRecipe.MachineRecipeFactory()
-                .begin(new ItemStack(ModItems.SPINDLE), progress, true)
+        MachineRecipeManager.addRecipe(new MachineRecipe.MachineRecipeFactory()
+                .begin(ModItems.SPINDLE, progress, true)
                 .setItemsIn(i1, i2, i3, i4)
                 .setSpecialInput(ModItems.FLYWHEEL_VIRTUAL)
                 .setItemsOut(output)
@@ -125,8 +172,8 @@ public class ModRecipes {
     }
 
     private static void registerNeedle(Object input, Object yarn, Object output, int progress) {
-                RecipeHandler.addRecipe(new MachineRecipe.MachineRecipeFactory()
-                .begin(new ItemStack(ModItems.NEEDLE), progress, true)
+                MachineRecipeManager.addRecipe(new MachineRecipe.MachineRecipeFactory()
+                .begin(ModItems.NEEDLE, progress, true)
                 .setItemsIn(yarn)
                 .setSpecialInput(input)
                 .setItemsOut(output)

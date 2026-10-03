@@ -12,9 +12,4 @@ public class ItemNeedle extends ModMachineBase {
         super(name, false);
         addSlotsWithBackground(Items.STRING);
     }
-
-    @Override
-    public List<String> addInfoToTooltip() {
-        return Collections.emptyList();
-    }
 }

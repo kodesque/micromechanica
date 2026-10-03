@@ -13,9 +13,4 @@ public class ItemMortar extends ModMachineBase {
         super(name, true);
         this.addSlots(4);
     }
-
-    @Override
-    public List<String> addInfoToTooltip() {
-        return Collections.emptyList();
-    }
 }

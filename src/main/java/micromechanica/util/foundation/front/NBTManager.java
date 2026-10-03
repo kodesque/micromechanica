@@ -1,4 +1,4 @@
-package micromechanica.util.foundation;
+package micromechanica.util.foundation.front;
 
 import micromechanica.root.Main;
 import net.minecraft.item.ItemStack;

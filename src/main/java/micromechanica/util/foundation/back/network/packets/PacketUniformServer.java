@@ -1,4 +1,4 @@
-package micromechanica.network.back.packets;
+package micromechanica.util.foundation.back.network.packets;
 
 import io.netty.buffer.ByteBuf;
 import micromechanica.network.front.EnumFunctions;

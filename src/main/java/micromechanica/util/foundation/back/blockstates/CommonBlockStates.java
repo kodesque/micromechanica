@@ -1,4 +1,4 @@
-package micromechanica.util.foundation;
+package micromechanica.util.foundation.back.blockstates;
 
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;

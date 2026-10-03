@@ -8,21 +8,6 @@ import java.util.List;
 
 public class ItemGalvanizer extends ModMachineBase {
     public ItemGalvanizer(String name) {
-        super(name);
-    }
-
-    @Override
-    public void conductClickedSelf(ItemStack clickedOn) {
-
-    }
-
-    @Override
-    public void conductClickedExternal(ItemStack clickedWith) {
-
-    }
-
-    @Override
-    public List<String> addInfoToTooltip() {
-        return Collections.emptyList();
+        super(name, false);
     }
 }

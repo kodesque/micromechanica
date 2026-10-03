@@ -1,12 +1,11 @@
 package micromechanica.events.back;
 
 import micromechanica.api.ICraftProgress;
-import micromechanica.common.capability.ProviderUniform;
+import micromechanica.util.foundation.back.capabilities.ProviderUniform;
 import micromechanica.common.init.ModBlocks;
 import micromechanica.common.init.ModItems;
 import micromechanica.common.init.ModRecipes;
 import micromechanica.common.init.ModSounds;
-import micromechanica.common.templates.ModItemCapableBase;
 import micromechanica.common.templates.ModMachineBase;
 import micromechanica.root.Main;
 import micromechanica.util.StorageTypes;
@@ -84,14 +83,14 @@ public class RegistryHandler {
 
         ItemStack stack = event.getObject();
 
-        if (!(stack.getItem() instanceof ModItemCapableBase)) {
+        if (!(stack.getItem() instanceof ModMachineBase)) {
             return;
         }
 
         ModMachineBase item = (ModMachineBase) stack.getItem();
 
         ItemStackHandler items = item.hasExpectedStorage(item, StorageTypes.ITEMS)
-                ? new ItemStackHandler()
+                ? new ItemStackHandler(item.getExpectedStorage(item).second())
                 : null;
 
         EnergyStorage energy = item.hasExpectedStorage(item, StorageTypes.ENERGY)

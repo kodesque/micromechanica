@@ -13,7 +13,7 @@ public enum EnumFunctions {
     /* methods that should be executed on the opposite side */
     /* keep in mind that these should only require values that are serializable */
 
-    /* ItemStack cannot be transferred! New instance is created on every deserialization/ */
+    /* ItemStack cannot be transferred! New instance is created on every deserialization! */
 
     ROLL_PROPERTIES_MAGNIFIER((ctx, args) -> {
         int index = (int) args[0];

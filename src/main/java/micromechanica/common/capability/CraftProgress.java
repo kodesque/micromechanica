@@ -1,20 +1,22 @@
 package micromechanica.common.capability;
 
 import micromechanica.api.ICraftProgress;
+import micromechanica.util.foundation.back.capabilities.BaseArithmetics;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-public class CraftProgress implements ICraftProgress {
+public class CraftProgress extends BaseArithmetics implements ICraftProgress {
 
     @CapabilityInject(ICraftProgress.class)
     public static Capability<ICraftProgress> CRAFT_PROGRESS;
 
-    private int value;
+    public CraftProgress() {
+        super(0, 200);
+    }
 
     public static void register() {
         CapabilityManager.INSTANCE.register(
@@ -46,15 +48,5 @@ public class CraftProgress implements ICraftProgress {
                 },
                 CraftProgress::new
         );
-    }
-
-    @Override
-    public int getValue() {
-        return value;
-    }
-
-    @Override
-    public void setValue(int value) {
-        this.value = value;
     }
 }

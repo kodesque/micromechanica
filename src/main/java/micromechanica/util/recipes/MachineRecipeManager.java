@@ -15,11 +15,10 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
-public class RecipeHandler {
+public class MachineRecipeManager {
 
     private static final ArrayList<MachineRecipe> modRecipes = new ArrayList<>();
 

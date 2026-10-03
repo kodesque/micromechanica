@@ -2,12 +2,12 @@ package micromechanica.events.front;
 
 import micromechanica.common.items.tools.ItemMagnifier;
 import micromechanica.common.templates.ModMachineBase;
-import micromechanica.network.back.Network;
-import micromechanica.network.back.packets.PacketUniformServer;
+import micromechanica.util.foundation.back.network.Network;
+import micromechanica.util.foundation.back.network.packets.PacketUniformServer;
 import micromechanica.network.front.EnumFunctions;
 import micromechanica.util.PropertyUtils;
 import micromechanica.util.StorageTypes;
-import micromechanica.util.recipes.RecipeHandler;
+import micromechanica.util.recipes.MachineRecipeManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiScreen;
@@ -35,38 +35,41 @@ public class MachineEvents {
                 ItemStack stackCarried = Minecraft.getMinecraft().player.inventory.getItemStack();
                 ItemStack stackLying = slot.getStack();
 
-                if (stackCarried.getItem() instanceof ModMachineBase) {
+                if (stackCarried.getItem() instanceof ModMachineBase || stackLying.getItem() instanceof ModMachineBase) {
 
-                    ModMachineBase carried = ((ModMachineBase) (stackCarried.getItem()));
+                    if (stackCarried.getItem() instanceof ModMachineBase && ((ModMachineBase) stackCarried.getItem()).getRealStorage(stackCarried, StorageTypes.ITEMS) != null) {
 
-                    if (!carried.isSpecialCase()) {
-                        RecipeHandler.tryCraft(stackCarried, stackLying);
-                        event.setCanceled(true);
-                    }
+                        ModMachineBase carried = ((ModMachineBase) (stackCarried.getItem()));
 
-                } else if (stackLying.getItem() instanceof ModMachineBase) {
-
-                    ModMachineBase lying = ((ModMachineBase) (stackLying.getItem()));
-
-                    IItemHandler itemHandler = ((IItemHandler)lying.getRealStorage(stackLying, StorageTypes.ITEMS));
-
-                    for (int i = 0; i < itemHandler.getSlots(); i++) {
-                        if (itemHandler.insertItem(i, stackCarried, true).isEmpty()) {
-                            break;
+                        if (!carried.isSpecialCase()) {
+                            MachineRecipeManager.tryCraft(stackCarried, stackLying);
+                            event.setCanceled(true);
                         }
-                    }
 
-                    if (!lying.isSpecialCase()) {
-                        ItemStack[] result = RecipeHandler.tryCraft(stackLying, stackCarried);
+                    } else if (stackLying.getItem() instanceof ModMachineBase &&  ((ModMachineBase) stackLying.getItem()).getRealStorage(stackLying, StorageTypes.ITEMS) != null) {
 
-                        for (int i = 0; i < result.length; i++) {
-                            if (!Minecraft.getMinecraft().player.inventory.addItemStackToInventory(result[i])) {
-                                Minecraft.getMinecraft().player.dropItem(result[i], false);
+                        ModMachineBase lying = ((ModMachineBase) (stackLying.getItem()));
+
+                        IItemHandler itemHandler = ((IItemHandler) lying.getRealStorage(stackLying, StorageTypes.ITEMS));
+
+                        for (int i = 0; i < itemHandler.getSlots(); i++) {
+                            if (itemHandler.insertItem(i, stackCarried, true).isEmpty()) {
+                                break;
                             }
                         }
 
-                        event.setCanceled(true);
+                        if (!lying.isSpecialCase()) {
+                            ItemStack[] result = MachineRecipeManager.tryCraft(stackLying, stackCarried);
+
+                            for (int i = 0; i < result.length; i++) {
+                                if (!Minecraft.getMinecraft().player.inventory.addItemStackToInventory(result[i])) {
+                                    Minecraft.getMinecraft().player.dropItem(result[i], false);
+                                }
+                            }
+                        }
                     }
+
+                    event.setCanceled(true);
                 }
             }
         }

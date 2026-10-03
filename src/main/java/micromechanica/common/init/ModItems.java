@@ -12,7 +12,11 @@ import micromechanica.common.items.tools.ItemMortar;
 import micromechanica.common.items.machines.ItemReforger;
 import micromechanica.common.items.machines.ItemVatLeech;
 import micromechanica.common.items.machines.ItemVatSlag;
+import micromechanica.common.items.tools.ItemNeedle;
+import micromechanica.common.items.tools.ItemSpindle;
 import micromechanica.common.templates.ModItemBase;
+import micromechanica.common.templates.ModItemVirtualBase;
+import micromechanica.common.templates.ModMachineBase;
 import micromechanica.root.Main;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -40,6 +44,8 @@ public class ModItems {
     public static Item QUILTED_LEATHER;
     public static Item DOLOMA;
     public static Item YARN;
+    public static Item ADHESIVE;
+    public static Item DRY_MILK;
     public static Item TCHOOGUN_INGOT;
     public static Item TCHOOGUN_BLEND;
 
@@ -58,6 +64,7 @@ public class ModItems {
 //        registerItem(ModItems.DEBUG = new ItemDebug("debug"));
 
         registerItem(ModItems.MAGNIFIER = new ItemMagnifier("magnifier"));
+
         registerItem(ModItems.CRUSHER = new ItemMortar("crusher"));
         registerItem(ModItems.FOUNDRY = new ItemFoundry("foundry"));
         registerItem(ModItems.VATSLAG = new ItemVatSlag("vat_slag"));
@@ -73,11 +80,15 @@ public class ModItems {
         registerItem(ModItems.QUILTED_LEATHER= new ModItemBase("quilted_leather"));
         registerItem(ModItems.DOLOMA= new ModItemBase("doloma"));
         registerItem(ModItems.YARN= new ModItemBase("yarn"));
+        registerItem(ModItems.ADHESIVE= new ModItemBase("adhesive"));
+        registerItem(ModItems.DRY_MILK= new ModItemBase("dry_milk"));
 
         registerItem(ModItems.BLOOMJAR = new ItemBloomJar("bloomjar"));
-        registerItem(ModItems.MORTAR = new ItemBloomJar("mortar"));
-        registerItem(ModItems.SPINDLE = new ItemBloomJar("spindle"));
-        registerItem(ModItems.NEEDLE = new ItemBloomJar("needle"));
+        registerItem(ModItems.MORTAR = new ItemMortar("mortar"));
+        registerItem(ModItems.SPINDLE = new ItemSpindle("spindle"));
+        registerItem(ModItems.NEEDLE = new ItemNeedle("needle"));
+        registerItem(ModItems.FLYWHEEL_VIRTUAL = new ModItemVirtualBase("flywheel_virtual"));
+        registerItem(ModItems.PESTLE_VIRTUAL = new ModItemVirtualBase("pestle_virtual"));
 
     }
 

@@ -1,8 +1,8 @@
-package micromechanica.network.back;
+package micromechanica.util.foundation.back.network;
 
-import micromechanica.network.back.packets.PacketUniformClient;
-import micromechanica.network.back.packets.PacketUniformServer;
-import micromechanica.root.Main;
+import micromechanica.util.foundation.back.network.packets.PacketUniformClient;
+import micromechanica.util.foundation.back.network.packets.PacketUniformServer;
+import micromechanica.util.foundation.root.Foundation;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 
 public class Network {
 
-    public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Main.MODID);
+    public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Foundation.BASEMOD_ID);
     private static int packetId = 0;
 
     public static void registerPackets() {
