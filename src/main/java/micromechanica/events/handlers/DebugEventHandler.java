@@ -1,4 +1,4 @@
-package micromechanica.events.back;
+package micromechanica.events.handlers;
 
 import micromechanica.util.PropertyUtils;
 import net.minecraft.item.ItemStack;

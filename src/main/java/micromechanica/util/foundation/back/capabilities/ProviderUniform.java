@@ -1,6 +1,8 @@
 package micromechanica.util.foundation.back.capabilities;
 
+import micromechanica.api.IChargeStorage;
 import micromechanica.api.ICraftProgress;
+import micromechanica.common.capability.ChargeStorage;
 import micromechanica.common.capability.CraftProgress;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -20,17 +22,20 @@ public class ProviderUniform implements ICapabilityProvider {
     private final IFluidHandler fluid;
 
     private final ICraftProgress progress;
+    private final IChargeStorage charge;
 
     public ProviderUniform(
             IItemHandler items,
             IEnergyStorage energy,
             IFluidHandler fluid,
-            ICraftProgress progress) {
+            ICraftProgress progress,
+            IChargeStorage charge) {
 
         this.items = items;
         this.energy = energy;
         this.fluid = fluid;
         this.progress = progress;
+        this.charge = charge;
     }
 
     @Override
@@ -49,6 +54,9 @@ public class ProviderUniform implements ICapabilityProvider {
 
         if (capability == CraftProgress.CRAFT_PROGRESS)
             return progress != null;
+
+        if (capability == ChargeStorage.CHARGE_STORAGE)
+            return charge != null;
 
         return false;
     }
@@ -70,6 +78,9 @@ public class ProviderUniform implements ICapabilityProvider {
 
         if (capability == CraftProgress.CRAFT_PROGRESS)
             return (T) progress;
+
+        if (capability == ChargeStorage.CHARGE_STORAGE)
+            return (T) charge;
 
         return null;
     }

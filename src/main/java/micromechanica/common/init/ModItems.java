@@ -16,7 +16,6 @@ import micromechanica.common.items.tools.ItemNeedle;
 import micromechanica.common.items.tools.ItemSpindle;
 import micromechanica.common.templates.ModItemBase;
 import micromechanica.common.templates.ModItemVirtualBase;
-import micromechanica.common.templates.ModMachineBase;
 import micromechanica.root.Main;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -42,12 +41,12 @@ public class ModItems {
     public static Item DIAMOND_GLASS;
     public static Item DIAMOND_GLASS_BLEND;
     public static Item QUILTED_LEATHER;
-    public static Item DOLOMA;
+    public static Item DOLOMITE;
     public static Item YARN;
     public static Item ADHESIVE;
     public static Item DRY_MILK;
-    public static Item TCHOOGUN_INGOT;
-    public static Item TCHOOGUN_BLEND;
+    public static Item CRUDE_IRON_INGOT;
+    public static Item CRUDE_IRON_BLEND;
 
     public static Item BLOOMJAR;
     public static Item MORTAR;
@@ -65,20 +64,20 @@ public class ModItems {
 
         registerItem(ModItems.MAGNIFIER = new ItemMagnifier("magnifier"));
 
-        registerItem(ModItems.CRUSHER = new ItemMortar("crusher"));
-        registerItem(ModItems.FOUNDRY = new ItemFoundry("foundry"));
-        registerItem(ModItems.VATSLAG = new ItemVatSlag("vat_slag"));
-        registerItem(ModItems.VATLEACH = new ItemVatLeech("vat_leaching"));
-        registerItem(ModItems.MIXER = new ItemMixer("mixer"));
-        registerItem(ModItems.REFORGER = new ItemReforger("reforger"));
-        registerItem(ModItems.GALVANIZER = new ItemGalvanizer("galvanizer"));
+//        registerItem(ModItems.CRUSHER = new ItemMortar("crusher"));
+//        registerItem(ModItems.FOUNDRY = new ItemFoundry("foundry"));
+//        registerItem(ModItems.VATSLAG = new ItemVatSlag("vat_slag"));
+//        registerItem(ModItems.VATLEACH = new ItemVatLeech("vat_leaching"));
+//        registerItem(ModItems.MIXER = new ItemMixer("mixer"));
+//        registerItem(ModItems.REFORGER = new ItemReforger("reforger"));
+//        registerItem(ModItems.GALVANIZER = new ItemGalvanizer("galvanizer"));
 
         registerItem(ModItems.DIAMOND_GLASS = new ModItemBase("diamond_glass"));
         registerItem(ModItems.DIAMOND_GLASS_BLEND = new ModItemBase("diamond_glass_blend"));
-        registerItem(ModItems.TCHOOGUN_INGOT = new ModItemBase("tchoogun_ingot"));
-        registerItem(ModItems.TCHOOGUN_BLEND = new ModItemBase("tchoogun_blend"));
+        registerItem(ModItems.CRUDE_IRON_INGOT = new ModItemBase("crude_iron_ingot"));
+        registerItem(ModItems.CRUDE_IRON_BLEND = new ModItemBase("crude_iron_blend"));
         registerItem(ModItems.QUILTED_LEATHER= new ModItemBase("quilted_leather"));
-        registerItem(ModItems.DOLOMA= new ModItemBase("doloma"));
+        registerItem(ModItems.DOLOMITE = new ModItemBase("dolomite"));
         registerItem(ModItems.YARN= new ModItemBase("yarn"));
         registerItem(ModItems.ADHESIVE= new ModItemBase("adhesive"));
         registerItem(ModItems.DRY_MILK= new ModItemBase("dry_milk"));

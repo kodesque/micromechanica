@@ -1,7 +1,8 @@
 package micromechanica.root;
 
 import micromechanica.common.init.ModCapabilities;
-import micromechanica.common.init.ModMiscTooltips;
+import micromechanica.common.init.special.ModTooltips;
+import micromechanica.common.init.special.ModDictionary;
 import micromechanica.network.back.proxy.CommonProxy;
 import micromechanica.util.foundation.root.Foundation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,7 +19,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 public class Main {
     public static final String MODID = "micromechanica";
     public static final String NAME = "Micromechanica";
-    public static final String VERSION = "0.0.1-ALPHA";
+    public static final String VERSION = "0.0.2-ALPHA";
 
     public static CreativeTabs tabMod = new ModCreativeTab("tabMicromechanica");
 
@@ -47,7 +48,8 @@ public class Main {
     public void postInit(FMLPostInitializationEvent event) {
         Foundation.postInit(event);
 
-        ModMiscTooltips.initTooltips();
+        ModDictionary.registerOres();
+        ModTooltips.initTooltips();
     }
 
     @EventHandler

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "micromechanica:items/tchoogun_ingot"
+    "layer0": "micromechanica:items/crude_iron_ingot"
   }
 }

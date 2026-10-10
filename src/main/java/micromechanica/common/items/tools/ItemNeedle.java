@@ -10,6 +10,6 @@ import java.util.List;
 public class ItemNeedle extends ModMachineBase {
     public ItemNeedle(String name) {
         super(name, false);
-        addSlotsWithBackground(Items.STRING);
+        addSlotsWithBackground(this, Items.STRING);
     }
 }

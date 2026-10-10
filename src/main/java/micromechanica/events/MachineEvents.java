@@ -1,4 +1,4 @@
-package micromechanica.events.front;
+package micromechanica.events;
 
 import micromechanica.common.items.tools.ItemMagnifier;
 import micromechanica.common.templates.ModMachineBase;
@@ -17,6 +17,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.lwjgl.input.Mouse;
 
@@ -50,16 +51,24 @@ public class MachineEvents {
 
                         ModMachineBase lying = ((ModMachineBase) (stackLying.getItem()));
 
-                        IItemHandler itemHandler = ((IItemHandler) lying.getRealStorage(stackLying, StorageTypes.ITEMS));
+                        IItemHandler itemHandler = lying.getRealStorage(stackLying, StorageTypes.ITEMS);
 
                         for (int i = 0; i < itemHandler.getSlots(); i++) {
+
                             if (itemHandler.insertItem(i, stackCarried, true).isEmpty()) {
-                                break;
+
+                                itemHandler.insertItem(i, stackCarried, false);
+                                stackCarried.shrink(stackCarried.getCount());
+
+                                event.setCanceled(true);
+                                return;
                             }
                         }
 
                         if (!lying.isSpecialCase()) {
                             ItemStack[] result = MachineRecipeManager.tryCraft(stackLying, stackCarried);
+
+                            if (result == null) return;
 
                             for (int i = 0; i < result.length; i++) {
                                 if (!Minecraft.getMinecraft().player.inventory.addItemStackToInventory(result[i])) {

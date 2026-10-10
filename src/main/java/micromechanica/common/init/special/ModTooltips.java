@@ -1,5 +1,6 @@
-package micromechanica.common.init;
+package micromechanica.common.init.special;
 
+import micromechanica.common.init.ModItems;
 import micromechanica.common.templates.ModItemBase;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.Style;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ModMiscTooltips {
+public class ModTooltips {
 
     public static void initTooltips() {
         addInfoToTooltip(ModItems.DRY_MILK,

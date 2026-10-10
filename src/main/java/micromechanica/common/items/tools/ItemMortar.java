@@ -11,6 +11,6 @@ import java.util.List;
 public class ItemMortar extends ModMachineBase {
     public ItemMortar(String name) {
         super(name, true);
-        this.addSlots(4);
+        this.addSlots(this, 4);
     }
 }

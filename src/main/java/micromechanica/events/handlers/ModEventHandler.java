@@ -1,5 +1,7 @@
-package micromechanica.events.front;
+package micromechanica.events.handlers;
 
+import micromechanica.events.MachineEvents;
+import micromechanica.events.PropertyEvents;
 import micromechanica.util.RenderMachineInfo;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;

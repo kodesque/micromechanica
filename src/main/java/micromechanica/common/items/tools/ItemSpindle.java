@@ -10,6 +10,6 @@ import java.util.List;
 public class ItemSpindle extends ModMachineBase {
     public ItemSpindle(String name) {
         super(name, true);
-        this.addSlots(4);
+        this.addSlots(this, 4);
     }
 }

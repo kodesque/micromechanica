@@ -1,6 +1,9 @@
-package micromechanica.events.back;
+package micromechanica.events.handlers;
 
+import micromechanica.api.IChargeStorage;
 import micromechanica.api.ICraftProgress;
+import micromechanica.common.capability.ChargeStorage;
+import micromechanica.common.capability.CraftProgress;
 import micromechanica.util.foundation.back.capabilities.ProviderUniform;
 import micromechanica.common.init.ModBlocks;
 import micromechanica.common.init.ModItems;
@@ -79,7 +82,7 @@ public class RegistryHandler {
     }
 
     @SubscribeEvent
-    public void attachCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
+    public static void attachCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
 
         ItemStack stack = event.getObject();
 
@@ -101,15 +104,21 @@ public class RegistryHandler {
                 ? new FluidTank(item.getExpectedStorage(item).second())
                 : null;
 
-        ICraftProgress progress = item.getCraftProgress(stack);
+        ICraftProgress progress = item.hasExpectedStorage(item, StorageTypes.PROGRESS)
+                ? new CraftProgress()
+                : null;
 
-        if (items == null && energy == null && fluid == null && progress == null) {
+        IChargeStorage charge = item.hasExpectedStorage(item, StorageTypes.CHARGE)
+                ? new ChargeStorage()
+                : null;
+
+        if (items == null && energy == null && fluid == null && progress == null && charge == null) {
             return;
         }
 
         event.addCapability(
                 new ResourceLocation(Main.MODID, "uniform"),
-                new ProviderUniform(items, energy, fluid, progress)
+                new ProviderUniform(items, energy, fluid, progress, charge)
         );
     }
 

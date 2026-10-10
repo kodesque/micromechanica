@@ -1,17 +1,12 @@
 package micromechanica.common.items.tools;
 
 import micromechanica.common.init.ModItems;
-import micromechanica.common.templates.ModItemCapableBase;
 import micromechanica.common.templates.ModMachineBase;
-import net.minecraft.item.ItemStack;
-
-import java.util.Collections;
-import java.util.List;
 
 public class ItemBloomJar extends ModMachineBase {
     public ItemBloomJar(String name) {
         super(name, false);
-        this.addSlotsWithBackground(ModItems.DIAMOND_GLASS_BLEND, ModItems.DOLOMA);
+        this.addSlotsWithBackground(this, ModItems.DIAMOND_GLASS_BLEND, ModItems.DOLOMITE);
         this.setSpecialCase();
     }
 }

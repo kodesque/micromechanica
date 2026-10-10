@@ -1,4 +1,19 @@
 # Micromechanica Changelog
+## 0.0.2-ALPHA
+
+---
+
+### Added:
+- Charge capability (energy type), to be used instead of FE in the native machines
+
+### Fixed:
+- Capabilities not being attached to the machines
+- (Crash) recipe handling, mouse interaction handling, capability handling
+
+### Changed:
+- Material names
+- Merged both Charge and Crafting Progress into uniform provider
+
 ## 0.0.1-ALPHA
 
 ---

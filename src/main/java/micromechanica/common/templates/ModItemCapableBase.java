@@ -1,7 +1,9 @@
 package micromechanica.common.templates;
 
 import akka.japi.Pair;
+import micromechanica.api.IChargeStorage;
 import micromechanica.api.ICraftProgress;
+import micromechanica.common.capability.ChargeStorage;
 import micromechanica.common.capability.CraftProgress;
 import micromechanica.util.StorageTypes;
 import net.minecraft.item.ItemStack;
@@ -19,12 +21,12 @@ public class ModItemCapableBase extends ModItemBase {
         super(name);
     }
 
-    public void addStorage(StorageTypes type, int size) {
-        expectedStorage.put((ModMachineBase) this, new Pair<>(type, size));
+    public void addStorage(ModMachineBase machine, StorageTypes type, int size) {
+        expectedStorage.put(machine, new Pair<>(type, size));
     }
 
     public boolean hasExpectedStorage(ModMachineBase machine, StorageTypes type) {
-        return expectedStorage.get(machine).first().equals(type);
+        return expectedStorage.get(machine) != null && expectedStorage.get(machine).first().equals(type);
     }
 
     public <T> T getRealStorage(ItemStack stack, StorageTypes type) {
@@ -35,16 +37,12 @@ public class ModItemCapableBase extends ModItemBase {
                 return (T)stack.getCapability(CapabilityEnergy.ENERGY, null);
             case FLUID:
                 return (T)stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+            case PROGRESS:
+                return (T)stack.getCapability(CraftProgress.CRAFT_PROGRESS, null);
+            case CHARGE:
+                return (T)stack.getCapability(ChargeStorage.CHARGE_STORAGE, null);
         }
         return null;
-    }
-
-    public boolean hasCraftProgress(ItemStack stack) {
-        return stack.getCapability(CraftProgress.CRAFT_PROGRESS, null) != null;
-    }
-
-    public ICraftProgress getCraftProgress(ItemStack stack) {
-        return stack.getCapability(CraftProgress.CRAFT_PROGRESS, null);
     }
 
     public Pair<StorageTypes, Integer> getExpectedStorage(ModMachineBase item) {

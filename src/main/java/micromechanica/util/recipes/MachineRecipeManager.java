@@ -55,9 +55,9 @@ public class MachineRecipeManager {
         }
 
         if ((specialInput != null && recipe.specialInput.equals(Ingredient.fromStacks(specialInput)) || recipe.specialInput == null)) {
-            if (base.hasCraftProgress(machine)) {
+            if (base.hasExpectedStorage(base, StorageTypes.PROGRESS)) {
 
-                ICraftProgress progress = base.getCraftProgress(machine);
+                ICraftProgress progress = base.getRealStorage(machine, StorageTypes.PROGRESS);
 
                 if (progress.getValue() < recipe.requiredProgress) {
                     progress.setValue(progress.getValue() + 1);
@@ -209,11 +209,11 @@ public class MachineRecipeManager {
                 continue;
             }
 
-            if (energyIn < recipe.energyIn) {
+            if (energyIn == 0 || energyIn < recipe.energyIn) {
                 continue;
             }
 
-            if (recipe.fluidsIn.length != fluidsIn.length) {
+            if (recipe.fluidsIn != fluidsIn) {
                 continue;
             }
 

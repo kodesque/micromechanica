@@ -53,27 +53,27 @@ public abstract class ModMachineBase extends ModItemCapableBase {
 //
 //    }
 
-    public void addSlots(int size) {
+    public void addSlots(ModMachineBase machine, int size) {
 
-        this.addStorage(StorageTypes.ITEMS, size);
+        this.addStorage(machine, StorageTypes.ITEMS, size);
     }
 
-    public void addSlotsWithBackground(Item... slots) {
+    public void addSlotsWithBackground(ModMachineBase machine, Item... slots) {
 
-        this.addStorage(StorageTypes.ITEMS, slots.length);
+        this.addStorage(machine, StorageTypes.ITEMS, slots.length);
 
         this.slotLayout = slots;
     }
 
-    public void addTanks(int amount, int size) {
+    public void addTanks(ModMachineBase machine, int amount, int size) {
 
         for (int i = 0; i < amount; i++) {
-            this.addStorage(StorageTypes.FLUID, size);
+            this.addStorage(machine, StorageTypes.FLUID, size);
         }
     }
 
-    public void addBattery(int capacity) {
-        this.addStorage(StorageTypes.ENERGY, capacity);
+    public void addBattery(ModMachineBase machine, int capacity) {
+        this.addStorage(machine, StorageTypes.ENERGY, capacity);
     }
 
     public Item[] getSlotLayout() {

@@ -1,4 +1,4 @@
-package micromechanica.events.front;
+package micromechanica.events;
 
 import java.util.ArrayList;
 import java.util.List;

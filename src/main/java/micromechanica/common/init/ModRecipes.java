@@ -41,7 +41,7 @@ public class ModRecipes {
                 "IL ",
                 "  L",
                 'D', ModItems.DIAMOND_GLASS,
-                'I', ModItems.TCHOOGUN_INGOT,
+                'I', ModItems.CRUDE_IRON_INGOT,
                 'L', ModItems.QUILTED_LEATHER
         );
 
@@ -70,7 +70,7 @@ public class ModRecipes {
                 "I  ",
                 " I ",
                 "  I",
-                'I', ModItems.TCHOOGUN_INGOT
+                'I', ModItems.CRUDE_IRON_INGOT
         );
 
         registerShaped(
@@ -80,7 +80,7 @@ public class ModRecipes {
                 "IS ",
                 'B', Items.BONE,
                 'S', ModItems.ADHESIVE,
-                'I', ModItems.TCHOOGUN_INGOT
+                'I', ModItems.CRUDE_IRON_INGOT
         );
 
 //        registerShapeless(ModItems.DIAMOND_GLASS_BLEND, Ingredient.fromItem(Items.SUGAR), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 15)), Ingredient.fromItem(Items.QUARTZ), Ingredient.fromItems(Items.DIAMOND));
@@ -97,13 +97,13 @@ public class ModRecipes {
 
     private static void initModMachines() {
         registerBloomJar(
-                ModItems.TCHOOGUN_BLEND,
-                ModItems.DOLOMA,
-                ModItems.TCHOOGUN_INGOT,
+                ModItems.CRUDE_IRON_BLEND,
+                ModItems.DOLOMITE,
+                ModItems.CRUDE_IRON_INGOT,
                 2400);
         registerBloomJar(
                 ModItems.DIAMOND_GLASS_BLEND,
-                ModItems.DOLOMA,
+                ModItems.DOLOMITE,
                 ModItems.DIAMOND_GLASS,
                 2400);
 
@@ -112,7 +112,7 @@ public class ModRecipes {
                 Items.BLAZE_ROD,
                 Items.IRON_INGOT,
                 Items.GUNPOWDER,
-                ModItems.TCHOOGUN_BLEND,
+                ModItems.CRUDE_IRON_BLEND,
                 20);
         registerMortar(
                 Items.SUGAR,
